@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.209.6/containers/typescript-node
 {
-  "name": "Node.js & TypeScript",
+  "name": "Portfolio Website",
   "build": {
     "dockerfile": "Dockerfile",
     // Update 'VARIANT' to pick a Node version: 16, 14, 12.
@@ -21,12 +21,17 @@
   "settings": {},
   // Add the IDs of extensions you want installed when the container is created.
   "extensions": [
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "dkundel.vscode-new-file",
+    "stylelint.vscode-stylelint",
+    "redhat.vscode-yaml",
+    "sleistner.vscode-fileutils",
+    "editorconfig.editorconfig",
+    "styled-components.vscode-styled-components",
+    "esbenp.prettier-vscode"
   ],
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
-  "forwardPorts": [
-    3000
-  ],
+  "forwardPorts": [3000],
   "remoteUser": "node",
   "features": {
     "docker-in-docker": "latest"
