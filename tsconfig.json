@@ -17,7 +17,7 @@
     "noImplicitAny": true,
     "baseUrl": "./src/",
     "paths": {
-      // "styles/*": ["./styles/*"],
+      "assets/*": ["../assets/*"]
       // "pages/*": ["./pages/*"],
       // "meta/*": ["./meta/*"]
     }
