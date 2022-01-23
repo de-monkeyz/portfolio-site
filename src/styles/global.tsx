@@ -12,10 +12,11 @@ const GlobalStyle = createGlobalStyle`
     --paragraph: 1rem;
 
     /* Effect styles */
-    --light---low--shadow:  -0.20000000298023224px 0.699999988079071px 0.800000011920929px rgba(168, 168, 168, 0.32), -0.4000000059604645px 1.100000023841858px 1.2999999523162842px rgba(168, 168, 168, 0.31), -0.800000011920929px 2.5999999046325684px 3px rgba(168, 168, 168, 0.3);
     --light---animation--inner--shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.46);
-    --dark---low--shadow:  -0.20000000298023224px 0.699999988079071px 0.800000011920929px rgba(43, 43, 43, 0.32), -0.4000000059604645px 1.100000023841858px 1.2999999523162842px rgba(43, 43, 43, 0.31), -0.800000011920929px 2.5999999046325684px 3px rgba(43, 43, 43, 0.3);
     --dark---animation--inner--shadow: inset 0px 0px 5px rgba(0, 0, 0, 1);
+
+    /* Sizing */
+    --size-content-width: 1112px;
 
     h1, h2, h3, h4, h5 {
       font-weight: bold;

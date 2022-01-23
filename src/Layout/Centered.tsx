@@ -31,12 +31,9 @@ const Centered: React.FC<PropTypes> = ({
 Centered.propTypes = {};
 
 const CenteredWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--padding, 0);
-  width: var(--width, 100%);
-  min-height: var(--height, 0px);
+  padding: 0 80px;
+  margin: 0 auto;
+  max-width: var(--size-content-width, 100%);
 `;
 
 export default Centered;
