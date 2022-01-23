@@ -1,6 +1,6 @@
-import { css } from "styled-components";
+import { css, FlattenSimpleInterpolation } from "styled-components";
 
-export const mobile = (styles: string) => css`
+export const mobile = (styles: FlattenSimpleInterpolation | string) => css`
   @media (max-width: 1024px) {
     ${styles}
   }
