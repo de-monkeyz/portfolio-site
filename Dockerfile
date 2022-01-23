@@ -9,7 +9,7 @@ RUN yarn install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 WORKDIR /app
-ENV NODE_ENV production
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN yarn build
@@ -18,7 +18,7 @@ RUN yarn build
 FROM node:16-alpine AS runner
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001

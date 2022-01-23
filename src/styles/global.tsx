@@ -43,6 +43,8 @@ const GlobalStyle = createGlobalStyle`
       font-size: var(--paragraph);
     }
 
+    transition: all 0.2s ease-in-out;
+
 
     body {
       background: var(--color-background);
