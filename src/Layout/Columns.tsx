@@ -6,11 +6,18 @@ import { addUnit } from "util/css";
 interface PropTypes {
   columns?: string;
   height?: string | number;
+  className?: string;
 }
 
-const Columns: React.FC<PropTypes> = ({ columns, height, children }) => {
+const Columns: React.FC<PropTypes> = ({
+  className,
+  columns,
+  height,
+  children,
+}) => {
   return (
     <ColumnsWrapper
+      className={className}
       style={{
         ["--columns" as any]: columns,
         ["--height" as any]: addUnit(height),

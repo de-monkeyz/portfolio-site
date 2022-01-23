@@ -43,7 +43,7 @@ function setColorsByTheme() {
   });
 }
 
-const createScriptTag = async () => {
+const colorsToString = async () => {
   const boundFn = String(setColorsByTheme)
     .replace('"🌈"', JSON.stringify(COLORS))
     .replace('"🥑"', JSON.stringify(EFFECTS))
@@ -54,8 +54,14 @@ const createScriptTag = async () => {
   const minified = await minify(calledFunction);
   calledFunction = minified.code!;
 
+  return calledFunction;
+};
+
+const createScriptTag = async () => {
   // eslint-disable-next-line react/no-danger
-  return <script dangerouslySetInnerHTML={{ __html: calledFunction }} />;
+  return (
+    <script dangerouslySetInnerHTML={{ __html: await colorsToString() }} />
+  );
 };
 
 /**
@@ -85,4 +91,4 @@ const FallbackStyles = () => {
   return <style>{wrappedInSelector}</style>;
 };
 
-export { FallbackStyles, createScriptTag };
+export { FallbackStyles, createScriptTag, colorsToString };

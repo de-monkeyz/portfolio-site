@@ -2,6 +2,8 @@ import GlobalStyle from "styles/global";
 
 import type { AppProps } from "next/app";
 
+import styled from "styled-components";
+import * as mixins from "styles/mixins";
 import { ThemeProvider } from "styles/theme/Context";
 import { MotionConfig } from "framer-motion";
 
@@ -56,16 +58,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <GlobalStyle />
         <ThemeToggle />
-        <Columns columns="var(--layout-columns)">
+        <App columns="var(--layout-columns)">
           <main>
             <Component {...pageProps} />
           </main>
           <Sidebar />
           <Footer />
-        </Columns>
+        </App>
       </ThemeProvider>
     </MotionConfig>
   );
 }
+
+const App = styled(Columns)`
+  ${mixins.mobile(`--layout-columns: 1fr !important;`)}
+`;
 
 export default MyApp;

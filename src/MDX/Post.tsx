@@ -9,6 +9,7 @@ import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
 
 interface PropTypes {
   source: MDXRemoteSerializeResult;
+  shareCard: string | null;
   meta: {
     title?: string;
     description?: string;
@@ -18,11 +19,14 @@ interface PropTypes {
   };
 }
 
-const Post: React.FC<PropTypes> = ({ source, meta }) => {
+const Post: React.FC<PropTypes> = ({ source, meta, shareCard }) => {
   return (
     <Centered>
       {meta.title && <Title>{meta.title}</Title>}
       <Head>
+        {shareCard && (
+          <meta property="og:image" content={shareCard} key="image" />
+        )}
         <meta
           key="published"
           property="og:article:published_time"
