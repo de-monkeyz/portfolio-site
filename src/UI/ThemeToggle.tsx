@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import styled from "styled-components";
 import { useThemeToggle } from "styles/theme/Context";
+import { css, mobile } from "styles/mixins";
 import { motion, Transition } from "framer-motion";
 
 import SunIcon from "assets/icons/carbon_sun.svg";
@@ -82,7 +84,8 @@ const AnimationWrapper = styled(motion.div)`
   transform-origin: center;
 `;
 const ThemeToggleWrapper = styled.button.attrs({ type: "button" })`
-  position: absolute;
+  position: fixed;
+  z-index: 10;
   top: 16px;
   left: 16px;
   border: 0;
@@ -92,7 +95,6 @@ const ThemeToggleWrapper = styled.button.attrs({ type: "button" })`
   /* box-shadow: var(--effect-lowShadow); */
   /* border-radius: 3px; */
   overflow: hidden;
-  /* background: var(--color-panel); */
   transition: color 0.25s ease-in-out, border-bottom-color 0.25s ease-in-out;
   cursor: pointer;
   border-bottom: 2px solid rgba(0, 0, 0, 0);
@@ -100,6 +102,12 @@ const ThemeToggleWrapper = styled.button.attrs({ type: "button" })`
   &:hover {
     border-bottom-color: var(--color-foreground);
   }
+
+  ${mobile(css`
+    top: 12px;
+    left: 0px;
+    border-bottom: 0;
+  `)}
 `;
 
 export default ThemeToggle;

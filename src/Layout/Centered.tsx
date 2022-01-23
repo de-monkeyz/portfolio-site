@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile, css } from "styles/mixins";
 
 import { addUnit } from "util/css";
 
@@ -34,6 +35,10 @@ const CenteredWrapper = styled.div`
   padding: 0 80px;
   margin: 0 auto;
   max-width: var(--size-content-width, 100%);
+
+  ${mobile(css`
+    padding: 0 32px;
+  `)}
 `;
 
 export default Centered;

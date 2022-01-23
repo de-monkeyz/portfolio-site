@@ -10,6 +10,7 @@ import Head from "next/head";
 import Columns from "Layout/Columns";
 import ThemeToggle from "UI/ThemeToggle";
 import Sidebar from "Sidebar";
+import Footer from "Footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -48,14 +49,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           />
           <meta name="msapplication-TileColor" content="#da532c " />
           <meta name="theme-color" content="#ffffff " />
+          <meta
+            name="viewport"
+            content="initial-scale=1, maximum-scale=1, minimum-scale=1"
+          />
         </Head>
         <GlobalStyle />
         <ThemeToggle />
-        <Columns columns="1fr 360px">
+        <Columns columns="var(--layout-columns)">
           <main>
             <Component {...pageProps} />
           </main>
           <Sidebar />
+          <Footer />
         </Columns>
       </ThemeProvider>
     </MotionConfig>

@@ -13,7 +13,7 @@ const Columns: React.FC<PropTypes> = ({ columns, height, children }) => {
     <ColumnsWrapper
       style={{
         ["--columns" as any]: columns,
-        ["--height" as any]: height,
+        ["--height" as any]: addUnit(height),
       }}
     >
       {children}
@@ -24,6 +24,8 @@ const Columns: React.FC<PropTypes> = ({ columns, height, children }) => {
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: var(--columns, 1fr);
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
 `;
 
 export default Columns;

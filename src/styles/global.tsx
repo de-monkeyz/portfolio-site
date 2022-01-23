@@ -1,6 +1,8 @@
 import "normalize.css/normalize.css";
 import { createGlobalStyle } from "styled-components";
 
+import * as mixins from "./mixins";
+
 const GlobalStyle = createGlobalStyle`
   :root {
     /* Text-size styles */
@@ -17,6 +19,11 @@ const GlobalStyle = createGlobalStyle`
 
     /* Sizing */
     --size-content-width: 1112px;
+    --size-footer: 64px;
+
+    /* Layout */
+    --layout-columns: 1fr 360px;
+    ${mixins.mobile(`--layout-columns: 1fr;`)}
 
     h1, h2, h3, h4, h5 {
       font-weight: bold;
