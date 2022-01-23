@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import { mobile, css } from "styles/mixins";
+import { mobile, notMobile, css } from "styles/mixins";
 
 import NavLink from "./NavLink";
 import Avatar from "./Avatar";
@@ -69,6 +69,10 @@ const MobileNavToggle = styled.button.attrs({ type: "button" })`
     width: 24px;
     height: 24px;
   }
+
+  ${notMobile(css`
+    display: none;
+  `)}
 `;
 const Navigation = styled(motion.nav)`
   margin: auto 0;
@@ -79,6 +83,10 @@ const Navigation = styled(motion.nav)`
   gap: 16px;
   background: var(--color-panel);
   transition: background-color 0.2s ease-in-out;
+
+  ${notMobile(css`
+    transform: none !important;
+  `)}
 
   ${mobile(css`
     width: 80vw;

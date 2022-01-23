@@ -6,5 +6,11 @@ export const mobile = (styles: FlattenSimpleInterpolation | string) => css`
   }
 `;
 
+export const notMobile = (styles: FlattenSimpleInterpolation | string) => css`
+  @media (min-width: 1025px) {
+    ${styles}
+  }
+`;
+
 // Re-export css for better syntax highlighting when using mixins
 export { css };
