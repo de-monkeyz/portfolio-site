@@ -25,6 +25,14 @@ export const COLORS = {
   },
 };
 
+export const EFFECTS = {
+  lowShadow: {
+    light:
+      "-0.20000000298023224px 0.699999988079071px 0.800000011920929px rgba(168, 168, 168, 0.32), -0.4000000059604645px 1.100000023841858px 1.2999999523162842px rgba(168, 168, 168, 0.31), -0.800000011920929px 2.5999999046325684px 3px rgba(168, 168, 168, 0.3)",
+    dark: "-0.20000000298023224px 0.699999988079071px 0.800000011920929px rgba(43, 43, 43, 0.32), -0.4000000059604645px 1.100000023841858px 1.2999999523162842px rgba(43, 43, 43, 0.31), -0.800000011920929px 2.5999999046325684px 3px rgba(43, 43, 43, 0.3)",
+  },
+};
+
 export const COLOR_MODE_KEY = "color-mode";
 export const INITIAL_COLOR_MODE_CSS_PROP = "--initial-color-mode";
 export type ColorMode = "dark" | "light";

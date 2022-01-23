@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   COLORS,
+  EFFECTS,
   COLOR_MODE_KEY,
   INITIAL_COLOR_MODE_CSS_PROP,
   ColorMode,
@@ -30,6 +31,10 @@ export const ThemeProvider: React.FC = ({ children }) => {
       Object.entries(COLORS).forEach(([name, colorByTheme]) => {
         const cssVarName = `--color-${name}`;
         root.style.setProperty(cssVarName, colorByTheme[newValue]);
+      });
+      Object.entries(EFFECTS).forEach(([name, effectByTheme]) => {
+        const cssVarName = `--effect-${name}`;
+        root.style.setProperty(cssVarName, effectByTheme[newValue]);
       });
       rawSetColorMode(newValue);
     }

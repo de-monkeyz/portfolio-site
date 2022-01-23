@@ -6,12 +6,14 @@ import { minify } from "terser";
 import {
   COLOR_MODE_KEY,
   COLORS,
+  EFFECTS,
   INITIAL_COLOR_MODE_CSS_PROP,
 } from "./constants";
 
 type ColorMode = "light" | "dark";
 function setColorsByTheme() {
   const colors = "🌈";
+  const effects = "🥑";
   const colorModeKey = "🔑";
   const colorModeCssProp = "⚡️";
 
@@ -35,11 +37,16 @@ function setColorsByTheme() {
     const cssVarName = `--color-${name}`;
     root.style.setProperty(cssVarName, colorByTheme[colorMode]);
   });
+  Object.entries(effects).forEach(([name, colorByTheme]: [string, any]) => {
+    const cssVarName = `--effect-${name}`;
+    root.style.setProperty(cssVarName, colorByTheme[colorMode]);
+  });
 }
 
 const createScriptTag = async () => {
   const boundFn = String(setColorsByTheme)
     .replace('"🌈"', JSON.stringify(COLORS))
+    .replace('"🥑"', JSON.stringify(EFFECTS))
     .replace("🔑", COLOR_MODE_KEY)
     .replace("⚡️", INITIAL_COLOR_MODE_CSS_PROP);
 

@@ -8,7 +8,7 @@ enum ShadowOptions {
 }
 
 const Shadows: { [key in ShadowOptions]?: string } = {
-  [ShadowOptions.LOW]: "--shadow-low",
+  [ShadowOptions.LOW]: "--effect-lowShadow",
 };
 interface PropTypes {
   shadow?: ShadowOptions;
