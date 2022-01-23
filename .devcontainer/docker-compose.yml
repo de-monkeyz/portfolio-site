@@ -1,0 +1,17 @@
+version: "3"
+services:
+  node:
+    build: .
+    environment:
+      - CHROMIUM_URL=ws://chrome:3000
+    volumes:
+      - "../:/workspace"
+      - node_deps:/workspace/node_modules/
+      - yarn_cache:/workspace/.yarn/cache/
+    command: sleep infinity
+  chrome:
+    image: browserless/chrome
+    restart: unless-stopped
+volumes:
+  node_deps:
+  yarn_cache:
