@@ -23,9 +23,8 @@ const GlobalStyle = createGlobalStyle`
       margin: 0;
     }
 
-  h1 {
+    h1 {
       font-size: var(--heading-1);
-      text-align: center;
     }
 
     h2 {

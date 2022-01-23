@@ -1,9 +1,11 @@
 import GlobalStyle from "styles/global";
+
 import type { AppProps } from "next/app";
-import Head from "next/head";
 
 import { ThemeProvider } from "styles/theme/Context";
 import { MotionConfig } from "framer-motion";
+
+import Head from "next/head";
 
 import Columns from "Layout/Columns";
 import ThemeToggle from "UI/ThemeToggle";

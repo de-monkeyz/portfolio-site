@@ -1,8 +1,13 @@
 import type { NextPage } from "next";
-import { getStaticMDXProps, MDXProps } from "MDX/utils";
+import {
+  getStaticMDXProps,
+  getStaticMDXPaths,
+  MDXProps,
+  list,
+} from "MDX/utils";
 import Post from "MDX/Post";
 
-const Home: NextPage<MDXProps> = ({ error, ...rest }) => {
+const Skill: NextPage<MDXProps> = ({ error, ...rest }) => {
   if (error) {
     return <p>Crap!</p>;
   }
@@ -18,6 +23,7 @@ const Home: NextPage<MDXProps> = ({ error, ...rest }) => {
   );
 };
 
-export const getStaticProps = getStaticMDXProps("home");
+export const getStaticPaths = getStaticMDXPaths("skills", true);
+export const getStaticProps = getStaticMDXProps("skills", true);
 
-export default Home;
+export default Skill;

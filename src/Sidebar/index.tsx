@@ -11,7 +11,9 @@ const Sidebar: React.FC = () => {
       <Name>Ashley Blurton</Name>
       <Title>Frontend Engineer</Title>
       <Navigation>
-        <NavLink href="/">Home</NavLink>
+        <NavLink href="/" exact={true}>
+          Home
+        </NavLink>
         <NavLink href="/skills">Skills</NavLink>
         <NavLink href="/interests">Interests</NavLink>
       </Navigation>
@@ -19,8 +21,6 @@ const Sidebar: React.FC = () => {
     </SidebarWrapper>
   );
 };
-
-Sidebar.propTypes = {};
 
 const Name = styled.span`
   font-size: 24px;
