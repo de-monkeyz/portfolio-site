@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Head>
           <meta
             property="og:image"
-            content="https://blurton.me/share_card.png"
+            content="https://blurton.me/share-card.png"
             key="image"
           />
           <meta property="og:image:width" content="1200" key="imageWidth" />
