@@ -26,6 +26,7 @@ const Name = styled.span`
   font-size: 24px;
   color: var(--color-primary);
   margin-bottom: -20px;
+  transition: color 0.2s ease-in-out;
 `;
 const Title = styled.span``;
 
@@ -47,6 +48,7 @@ const SidebarWrapper = styled.aside`
   align-items: center;
   padding: 16px 32px;
   gap: 20px;
+  transition: background-color 0.2s ease-in-out;
 `;
 
 export default Sidebar;

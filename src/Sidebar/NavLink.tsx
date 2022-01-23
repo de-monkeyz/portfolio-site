@@ -37,6 +37,8 @@ const A = styled.a`
   &.active {
     color: var(--color-secondary);
   }
+
+  transition: color 0.2s ease-in-out;
 `;
 
 export default NavLink;

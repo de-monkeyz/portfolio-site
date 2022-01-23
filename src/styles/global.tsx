@@ -22,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
       margin: 0;
     }
 
-    h1 {
+  h1 {
       font-size: var(--heading-1);
       text-align: center;
     }
@@ -55,6 +55,8 @@ const GlobalStyle = createGlobalStyle`
       font-family: 'Sarabun', sans-serif;
       font-size: 14px;
       line-height: 1.5;
+
+      transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
     }
 
     * {

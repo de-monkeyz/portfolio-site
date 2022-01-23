@@ -20,9 +20,8 @@ export const COLORS = {
     dark: "hsla(210, 10%, 27.5%, 1)", // Cyan
   },
   sidebar: {
-    light:
-      "linear-gradient(90deg, rgba(69, 69, 69, 0.05) 0%, rgba(69, 69, 69, 0) 3.65%), #F7F7F7",
-    dark: "linear-gradient(90deg, #333A41 0%, rgba(15, 15, 15, 0) 3.65%), #3F464D",
+    light: "#F7F7F7",
+    dark: "#3F464D",
   },
 };
 

@@ -33,6 +33,7 @@ const PanelWrapper = styled.div`
   border-radius: 4px;
   background: var(--color-panel);
   box-shadow: var(--shadow);
+  transition: background-color 0.2s ease-in-out;
 `;
 
 export default Panel;

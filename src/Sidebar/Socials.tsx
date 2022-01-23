@@ -35,11 +35,10 @@ const Link = styled.a`
   text-decoration: none;
   display: block;
   /* width: 44px; */
-
+  transition: color 0.2s ease-in-out;
   svg {
     display: block;
     width: 34px;
-    fill: var(--color-foreground);
   }
 `;
 
