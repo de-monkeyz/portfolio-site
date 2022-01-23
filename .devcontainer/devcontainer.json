@@ -14,9 +14,10 @@
   "workspaceMount": "source=${localWorkspaceFolder}/,target=/workspace,type=bind",
   "workspaceFolder": "/workspace",
   "mounts": [
-    "source=node_deps,target=${containerWorkspaceFolder}/node_modules,type=volume"
+    "source=node_deps,target=${containerWorkspaceFolder}/node_modules,type=volume",
+    "source=yarn_cache,target=${containerWorkspaceFolder}/.yarn/cache,type=volume"
   ],
-  "postCreateCommand": "sudo chown node node_modules",
+  "postCreateCommand": "sudo chown node node_modules && sudo chown -R node .yarn",
   // Set *default* container specific settings.json values on container create.
   "settings": {},
   // Add the IDs of extensions you want installed when the container is created.
