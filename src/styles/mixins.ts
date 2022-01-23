@@ -1,6 +1,6 @@
 import { css } from "styled-components";
 
-export const mobile = (styles) => css`
+export const mobile = (styles: string) => css`
   @media (max-width: 1024px) {
     ${styles}
   }
