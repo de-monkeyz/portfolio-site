@@ -6,9 +6,11 @@ import { motion, Transition } from "framer-motion";
 import SunIcon from "assets/icons/carbon_sun.svg";
 import MoonIcon from "assets/icons/carbon_moon.svg";
 
+// Just in case some oddball (probably me during testing) spams this > 100 times
+const MAX_TURNS = 360 * 100;
 const AnimationConfig: Transition = {
   type: "spring",
-  duration: 1,
+  mass: 0.5,
 };
 
 const ThemeToggle: React.FC = () => {
@@ -25,7 +27,7 @@ const ThemeToggle: React.FC = () => {
       if (!lastTheme.current) {
         setRotation(theme === "dark" ? 180 : 0);
       } else {
-        setRotation((r) => (r += 180));
+        setRotation((r) => (r + 180) % MAX_TURNS);
       }
     }
     lastTheme.current = theme;
@@ -84,7 +86,7 @@ const ThemeToggleWrapper = styled.button.attrs({ type: "button" })`
   top: 16px;
   left: 16px;
   border: 0;
-  width: 44px;
+  width: 48px;
   height: 32px;
   background: none;
   /* box-shadow: var(--effect-lowShadow); */
