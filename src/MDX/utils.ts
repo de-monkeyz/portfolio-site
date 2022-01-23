@@ -28,17 +28,7 @@ function loadMatter(source: string) {
   const { content, data } = matter(source);
   // Next.js can't process any Date objects, so forcibly convert them here
   for (const [key, value] of Object.entries(data)) {
-    console.log(
-      "Iterating over metadata",
-      key,
-      "=>",
-      value,
-      "(",
-      typeof value,
-      ")"
-    );
     if (value instanceof Date) {
-      console.log("Converting", value, "to ISO");
       data[key] = formatISO(value);
     }
   }
