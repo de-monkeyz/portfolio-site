@@ -1,12 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import styled from "styled-components";
-import Picture from "assets/photos/Avatar@3x.png";
+import Picture from "assets/photos/Avatar@3x.jpg";
 
 const Avatar: React.FC = () => {
   return (
     <AvatarWrapper>
-      <Image src={Picture} alt="Me" layout="fill" />
+      <Image src={Picture} alt="Me" layout="fill" width={192} height={192} />
       <ColorOverlay />
     </AvatarWrapper>
   );
