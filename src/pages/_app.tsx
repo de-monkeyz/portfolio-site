@@ -16,6 +16,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     <MotionConfig reducedMotion="user">
       <ThemeProvider>
         <Head>
+          <meta
+            property="og:image"
+            content="https://blurton.me/share_card.png"
+            key="image"
+          />
+          <meta property="og:image:width" content="1200" key="imageWidth" />
+          <meta property="og:image:height" content="630" key="imageHeight" />
           <link
             rel="apple-touch-icon"
             sizes="180x180"
