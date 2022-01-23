@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   return (
     <Centered padding={32} height="100vh">
       <Panel>
-        <Title>Welcome</Title>
+        <Title>Hello!</Title>
         <h1>Coming Soon.</h1>
       </Panel>
     </Centered>

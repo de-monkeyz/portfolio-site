@@ -5,7 +5,7 @@ export const COLORS = {
   },
   background: {
     light: "hsla(0, 0%, 98%, 1)", // white
-    dark: "hsla(0, 1.9%, 20.4%, 1)", // navy navy blue
+    dark: "hsla(210, 10%, 21.5%, 1)", // navy navy blue
   },
   primary: {
     light: "hsla(203, 71.2%, 44.9%, 1)", // Pinkish-red
@@ -22,7 +22,7 @@ export const COLORS = {
   sidebar: {
     light:
       "linear-gradient(90deg, rgba(69, 69, 69, 0.05) 0%, rgba(69, 69, 69, 0) 3.65%), #F7F7F7",
-    dark: "linear-gradient(90deg, #333A41 0%, rgba(69, 69, 69, 0) 6.56%), #3F464D",
+    dark: "linear-gradient(90deg, #333A41 0%, rgba(15, 15, 15, 0) 3.65%), #3F464D",
   },
 };
 
