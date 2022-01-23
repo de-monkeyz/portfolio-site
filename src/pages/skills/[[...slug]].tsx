@@ -1,10 +1,5 @@
 import type { NextPage } from "next";
-import {
-  getStaticMDXProps,
-  getStaticMDXPaths,
-  MDXProps,
-  list,
-} from "MDX/utils";
+import { getStaticMDXProps, getStaticMDXPaths, MDXProps } from "MDX/utils";
 import Post from "MDX/Post";
 
 const Skill: NextPage<MDXProps> = ({ error, ...rest }) => {
