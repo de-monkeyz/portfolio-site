@@ -32,6 +32,10 @@ COPY --from=deps /app/.yarnrc.yml ./.yarnrc.yml
 COPY --from=deps /app/.yarn ./.yarn
 COPY . .
 
+ARG PUBLIC_URL=http://localhost:3000
+
+ENV PUBLIC_URL=${PUBLIC_URL}
+
 RUN yarn build
 
 # Production image, copy all the files and run next
