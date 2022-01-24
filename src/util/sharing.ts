@@ -131,7 +131,7 @@ export async function getOGImage(slug: string): Promise<string | null> {
       publishedAt
     );
 
-    await page.waitForTimeout(500);
+    await page.waitForNetworkIdle();
 
     const buffer = (await page.screenshot({ type: "png" })) as Buffer;
     await fs.promises.mkdir(IMAGES, { recursive: true });
