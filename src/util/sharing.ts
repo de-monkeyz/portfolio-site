@@ -33,7 +33,7 @@ export async function getOGImage(slug: string): Promise<string | null> {
 
   if (!browser) {
     browser = await puppeteer.launch({
-      args: ["--disable-dev-shm-usage"],
+      args: ["--disable-dev-shm-usage", "--no-sandbox"],
     });
   }
 
@@ -131,9 +131,9 @@ export async function getOGImage(slug: string): Promise<string | null> {
       publishedAt
     );
 
-    await page.waitForNetworkIdle();
+    await page.waitForTimeout(500);
 
-    const buffer = await page.screenshot({ type: "png" });
+    const buffer = (await page.screenshot({ type: "png" })) as Buffer;
     await fs.promises.mkdir(IMAGES, { recursive: true });
     await fs.promises.writeFile(file, buffer);
 
