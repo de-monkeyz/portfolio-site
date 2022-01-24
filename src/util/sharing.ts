@@ -137,7 +137,7 @@ export async function getOGImage(slug: string): Promise<string | null> {
     await fs.promises.mkdir(IMAGES, { recursive: true });
     await fs.promises.writeFile(file, buffer);
 
-    return file;
+    return publicUrl;
   } catch (e: any) {
     console.error(e);
   } finally {
