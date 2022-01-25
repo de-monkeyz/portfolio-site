@@ -3,7 +3,7 @@ import GlobalStyle from "styles/global";
 import type { AppProps } from "next/app";
 
 import styled from "styled-components";
-import * as mixins from "styles/mixins";
+import { mobile, notMobile, css } from "styles/mixins";
 import { ThemeProvider } from "styles/theme/Context";
 import { MotionConfig } from "framer-motion";
 
@@ -71,7 +71,14 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 const App = styled(Columns)`
-  ${mixins.mobile(`--layout-columns: 1fr !important;`)}
+  ${mobile(`--layout-columns: 1fr !important;`)}
+  align-items: start;
+
+  ${notMobile(css`
+    main {
+      grid-row: 1 / -1;
+    }
+  `)}
 `;
 
 export default MyApp;

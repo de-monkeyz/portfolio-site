@@ -20,6 +20,8 @@ const FooterWrapper = styled.footer`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: sticky;
+  top: calc(100vh - var(--size-footer));
 
   ${mobile(
     css`

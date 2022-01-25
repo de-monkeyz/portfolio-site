@@ -117,10 +117,11 @@ const SidebarWrapper = styled.aside`
   padding: 16px 32px;
   gap: 20px;
   transition: background-color 0.2s ease-in-out;
+  position: sticky;
+  top: 0;
 
   ${mobile(
     css`
-      position: sticky;
       top: -290px;
       order: -1;
       min-height: auto;
