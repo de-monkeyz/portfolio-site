@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
-import { getStaticMDXProps, getStaticMDXPaths, MDXProps } from "MDX/utils";
+import { createStaticProps, createStaticPaths } from "MDX/next";
+import { MDXProps } from "MDX/types";
 import Post from "MDX/Post";
 import { getStaticShareCardProps } from "util/sharing";
 
@@ -19,10 +20,10 @@ const Skill: NextPage<MDXProps> = ({ error, ...rest }) => {
   );
 };
 
-export const getStaticPaths = getStaticMDXPaths("skills", true);
+export const getStaticPaths = createStaticPaths("skills", true);
 export const getStaticProps = getStaticShareCardProps(
   "skills",
-  getStaticMDXProps("skills", true)
+  createStaticProps("skills", true)
 );
 
 export default Skill;

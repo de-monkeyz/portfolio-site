@@ -6,7 +6,7 @@ import { createHash } from "crypto";
 
 import { globalCss } from "styles/global";
 import { colorsToString } from "styles/theme/ssr";
-import { loadAndParse } from "MDX/utils";
+import { loadAndParse } from "MDX/parse";
 import { format, parseISO } from "date-fns";
 
 interface ShareCardMetadata {

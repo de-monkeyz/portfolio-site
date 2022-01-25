@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
-import { getStaticMDXProps, MDXProps } from "MDX/utils";
+import { createStaticProps } from "MDX/next";
+import { MDXProps } from "MDX/types";
 import Post from "MDX/Post";
 
 const Home: NextPage<MDXProps> = ({ error, ...rest }) => {
@@ -18,6 +19,6 @@ const Home: NextPage<MDXProps> = ({ error, ...rest }) => {
   );
 };
 
-export const getStaticProps = getStaticMDXProps("home");
+export const getStaticProps = createStaticProps("home");
 
 export default Home;
