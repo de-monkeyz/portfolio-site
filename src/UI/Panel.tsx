@@ -26,8 +26,6 @@ const Panel: React.FC<PropTypes> = ({ shadow, children }) => {
   );
 };
 
-Panel.propTypes = {};
-
 const PanelWrapper = styled.div`
   padding: 16px;
   border-radius: 4px;

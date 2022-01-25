@@ -11,12 +11,20 @@ export const COLORS = {
     light: "hsla(203, 71.2%, 44.9%, 1)", // Pinkish-red
     dark: "hsla(202, 95.5%, 74.1%, 1)", // Yellow
   },
+  primaryActive: {
+    light: "hsla(203, 71.2%, 34.9%, 1)", // Pinkish-red
+    dark: "hsla(202, 95.5%, 80.1%, 1)", // Yellow
+  },
   secondary: {
     light: "hsla(10, 100%, 70%, 1)", // Purplish-blue
     dark: "hsla(10, 100%, 70%, 1)", // Cyan
   },
+  secondaryActive: {
+    light: "hsla(10, 100%, 65%, 1)", // Purplish-blue
+    dark: "hsla(10, 100%, 65%, 1)", // Cyan
+  },
   panel: {
-    light: "hsla(0, 0%, 98.4%, 1)", // Purplish-blue
+    light: "hsla(0, 0%, 93.4%, 1)", // Purplish-blue
     dark: "hsla(210, 10%, 27.5%, 1)", // Cyan
   },
   sidebar: {

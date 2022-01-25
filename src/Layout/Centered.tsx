@@ -29,8 +29,6 @@ const Centered: React.FC<PropTypes> = ({
   );
 };
 
-Centered.propTypes = {};
-
 const CenteredWrapper = styled.div`
   padding: 0 80px;
   margin: 0 auto;

@@ -20,10 +20,10 @@ const Skill: NextPage<MDXProps> = ({ error, ...rest }) => {
   );
 };
 
-export const getStaticPaths = createStaticPaths("skills", true);
+export const getStaticPaths = createStaticPaths("interests", true);
 export const getStaticProps = getStaticShareCardProps(
-  "skills",
-  createStaticProps("skills", true)
+  "interests",
+  createStaticProps("interests", true)
 );
 
 export default Skill;

@@ -12,5 +12,10 @@ export const notMobile = (styles: FlattenSimpleInterpolation | string) => css`
   }
 `;
 
+export const transitionTheme = () =>
+  css`
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+  `;
+
 // Re-export css for better syntax highlighting when using mixins
 export { css };

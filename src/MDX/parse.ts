@@ -14,6 +14,7 @@ import {
   MDXMeta,
   MDXRelatedItem,
   MDXParseOptions,
+  MDXRoute,
 } from "./types";
 
 function nameToTypeAndSlug(name: string): [string, string] {
@@ -94,6 +95,7 @@ async function parseMatter(
 
   const parsed = await processMatter(
     {
+      id: name,
       slug,
       type,
       excerpt: textExcerpt,
@@ -145,6 +147,8 @@ async function loadMeta(name: string): Promise<MDXRelatedItem> {
   });
 
   return {
+    id: frontMatter.id,
+    icon: frontMatter.icon ?? null,
     type: frontMatter.type,
     title: frontMatter.title,
     slug: frontMatter.slug,
@@ -158,13 +162,20 @@ async function loadAndParse(name: string): Promise<MDXResult> {
   });
 }
 
-async function list(category: string, withMeta?: boolean) {
+async function list(
+  category: string,
+  withMeta?: boolean,
+  excludeIndex?: boolean
+): Promise<Array<MDXRoute>> {
   try {
     const directory = path.join(MDX_DIR, `/${category}/`);
     const files = await fs.promises.readdir(directory);
 
-    const items = [];
+    const items: Array<MDXRoute> = [];
     for (const filename of files) {
+      if (excludeIndex && filename === "index.mdx") {
+        continue;
+      }
       const slug = filename.replace(/\.mdx$/, "");
       let data = {};
       if (withMeta) {
@@ -173,7 +184,7 @@ async function list(category: string, withMeta?: boolean) {
         ({ data } = await parseMatter(content, name));
       }
       items.push({
-        ...(withMeta ? data : {}),
+        data: withMeta ? (data as MDXRelatedItem) : null,
         params: {
           slug: [slug],
         },

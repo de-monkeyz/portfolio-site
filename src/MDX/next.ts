@@ -14,12 +14,11 @@ function createStaticProps(nameOrCategory: string, multi?: boolean) {
           source: data?.source,
           meta: data?.frontMatter,
           error: false,
-          ...(multi && slug === "index"
-            ? {
-                pages: await list(nameOrCategory, true),
-              }
-            : {}),
-        },
+          pages:
+            multi && slug === "index"
+              ? await list(nameOrCategory, true, true)
+              : null,
+        } as MDXProps,
       };
     } catch (e) {
       return {
@@ -44,7 +43,9 @@ function createStaticPaths(type: string, includeIndex?: boolean) {
               },
             ]
           : []),
-        ...items,
+        ...items.map((item) => ({
+          params: item.params,
+        })),
       ],
       fallback: false,
     };

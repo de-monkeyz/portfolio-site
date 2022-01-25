@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import { createStaticProps } from "MDX/next";
 import { MDXProps } from "MDX/types";
-import Post from "MDX/Post";
+import Post from "Post";
 
 const Home: NextPage<MDXProps> = ({ error, ...rest }) => {
   if (error) {

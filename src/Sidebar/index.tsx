@@ -63,7 +63,7 @@ const MobileNavToggle = styled.button.attrs({ type: "button" })`
   border: 0;
   cursor: pointer;
   color: inherit;
-  z-index: 2;
+  z-index: 20;
 
   svg {
     width: 24px;
@@ -81,7 +81,6 @@ const Navigation = styled(motion.nav)`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  background: var(--color-panel);
   transition: background-color 0.2s ease-in-out;
 
   ${notMobile(css`
@@ -89,12 +88,14 @@ const Navigation = styled(motion.nav)`
   `)}
 
   ${mobile(css`
+    background: var(--color-panel);
     width: 80vw;
     max-width: 360px;
     position: fixed;
     left: 100%;
     height: 100vh;
     top: 0;
+    z-index: 10;
 
     --shadow-color: 0deg 0% 0%;
     --shadow-elevation-medium: -0.8px 0.1px 0.8px
@@ -107,7 +108,7 @@ const Navigation = styled(motion.nav)`
   `)}
 `;
 
-const SidebarWrapper = styled.aside`
+const SidebarWrapper = styled.header`
   min-height: calc(100vh - var(--size-footer, 0px));
   background: var(--color-sidebar);
   /* width: 360px; */
@@ -122,6 +123,7 @@ const SidebarWrapper = styled.aside`
 
   ${mobile(
     css`
+      z-index: 1;
       top: -290px;
       order: -1;
       min-height: auto;

@@ -2022,6 +2022,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/webpack-env@npm:^1.16.3":
+  version: 1.16.3
+  resolution: "@types/webpack-env@npm:1.16.3"
+  checksum: faefa7c0a75289fb469b9a5ae44059a00009de840e0e62d13b3f837d77647da76808e7839cdc414b8c585969cf6b6a7f290dc2cb437a9ccdf04cb214c68f3223
+  languageName: node
+  linkType: hard
+
 "@types/yauzl@npm:^2.9.1":
   version: 2.9.2
   resolution: "@types/yauzl@npm:2.9.2"
@@ -5945,6 +5952,7 @@ __metadata:
     "@types/node": 17.0.10
     "@types/react": 17.0.38
     "@types/styled-components": ^5.1.20
+    "@types/webpack-env": ^1.16.3
     "@typescript-eslint/eslint-plugin": ^5.10.0
     "@typescript-eslint/parser": ^5.10.0
     babel-plugin-styled-components: ^2.0.2
