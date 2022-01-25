@@ -12,7 +12,9 @@ interface PropTypes {
   shareCard: string | null;
   meta: {
     title?: string;
+    shareTitle?: string;
     description?: string;
+    excerpt?: string;
     image?: string;
     publishedAt: string;
     updatedAt?: string;
@@ -20,9 +22,11 @@ interface PropTypes {
 }
 
 const Post: React.FC<PropTypes> = ({ source, meta, shareCard }) => {
+  const description = meta.description || meta.excerpt;
+  const shareTitle = meta.shareTitle || meta.title;
   return (
     <Centered>
-      {meta.title && <Title>{meta.title}</Title>}
+      {shareTitle && <Title>{shareTitle}</Title>}
       <Head>
         {shareCard && (
           <meta property="og:image" content={shareCard} key="image" />
@@ -39,8 +43,16 @@ const Post: React.FC<PropTypes> = ({ source, meta, shareCard }) => {
             content={meta.updatedAt}
           />
         )}
+        {description && (
+          <meta
+            property="og:description"
+            content={description}
+            key="description"
+          />
+        )}
       </Head>
       <PostWrapper>
+        {meta.title && <h1>{meta.title}</h1>}
         <MDXRemote {...source} />
       </PostWrapper>
     </Centered>

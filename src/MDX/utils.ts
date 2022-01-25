@@ -4,6 +4,8 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import readingTime from "reading-time";
 import { formatISO } from "date-fns";
+import { remark } from "remark";
+import strip from "strip-markdown";
 
 import path from "path";
 import fs from "fs";
@@ -25,7 +27,10 @@ async function load(name: string): Promise<string> {
 }
 
 function loadMatter(source: string) {
-  const { content, data } = matter(source);
+  const { content, data, excerpt } = matter(source, {
+    excerpt: true,
+    excerpt_separator: "<!-- end -->",
+  });
   // Next.js can't process any Date objects, so forcibly convert them here
   for (const [key, value] of Object.entries(data)) {
     if (value instanceof Date) {
@@ -33,16 +38,23 @@ function loadMatter(source: string) {
     }
   }
 
-  return { content, data };
+  return { content, data, excerpt };
 }
 
 async function parse(mdx: string): Promise<MDXResult> {
-  const { content, data } = loadMatter(mdx);
+  const { content, data, excerpt } = loadMatter(mdx);
   const source = await serialize(content, { scope: data });
+
+  // Convert excerpt to plain text
+  const textExcerpt = await remark()
+    .use(strip)
+    .process(excerpt ?? "");
+
   return {
     source,
     frontMatter: {
       readingTime: readingTime(content),
+      excerpt: textExcerpt.toString().trim(),
       ...data,
     },
   };
