@@ -2,7 +2,7 @@
   "name": "portfolio-site",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next-remote-watch ./data/mdx/",
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
@@ -44,6 +44,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.0",
+    "next-remote-watch": "^1.0.0",
     "prettier": "^2.5.1",
     "typescript": "4.5.5"
   },
