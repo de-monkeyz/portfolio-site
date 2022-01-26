@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 import Head from "next/head";
@@ -8,6 +8,7 @@ import Centered from "Layout/Centered";
 import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
 import { MDXRelatedItem, MDXMeta, MDXRoute } from "MDX/types";
 import Related from "./Related";
+import Gif from "./Gif";
 
 export interface PostProps {
   source: MDXRemoteSerializeResult;
@@ -21,6 +22,10 @@ export interface PostProps {
   };
   pages?: Array<MDXRoute>;
 }
+
+const COMPONENTS: { [key: string]: ReactNode } = {
+  Gif: Gif,
+};
 
 const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
   const description = meta.description || meta.excerpt;
@@ -54,7 +59,7 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
       </Head>
       <PostWrapper>
         {meta.title && <h1>{meta.title}</h1>}
-        <MDXRemote {...source} />
+        <MDXRemote {...source} components={COMPONENTS} />
       </PostWrapper>
       {!!meta.related.length && (
         <RelatedItems>
