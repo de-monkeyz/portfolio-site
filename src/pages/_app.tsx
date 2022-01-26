@@ -1,6 +1,8 @@
 import GlobalStyle from "styles/global";
 
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
+import { NextPage } from "next";
+import { ReactElement, ReactNode } from "react";
 
 import styled from "styled-components";
 import { mobile, notMobile, css } from "styles/mixins";
@@ -14,7 +16,24 @@ import ThemeToggle from "UI/ThemeToggle";
 import Sidebar from "Sidebar";
 import Footer from "Footer";
 
-function MyApp({ Component, pageProps }: AppProps) {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const layout = Component.getLayout?.(<Component {...pageProps} />);
+  if (layout) {
+    return (
+      <ThemeProvider>
+        <GlobalStyle />
+        {layout}
+      </ThemeProvider>
+    );
+  }
+
   return (
     <MotionConfig reducedMotion="user">
       <ThemeProvider>

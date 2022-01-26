@@ -1,4 +1,5 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
+import { ReadTimeResults } from "reading-time";
 
 export interface MDXRawMeta {
   id: string;
@@ -9,6 +10,7 @@ export interface MDXRawMeta {
   shareTitle?: string;
   excerpt: string | null;
   related?: string;
+  readingTime?: ReadTimeResults;
   [key: string]: any;
 }
 

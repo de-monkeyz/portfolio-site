@@ -65,7 +65,7 @@ async function processMatter(data: MDXRawMeta, loadRelated?: boolean) {
       processed[key] = formatISO(value);
     }
 
-    if (typeof value === "string") {
+    if (["string", "boolean", "number"].includes(typeof value)) {
       processed[key] = value;
     }
   }
