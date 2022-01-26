@@ -51,6 +51,12 @@ const Card: React.FC<CardProps> = ({ useFileURL, page, thumbnail }) => {
             <span>{format(parseISO(meta.publishedAt), "do MMM yyyy")}</span>
           </PublishDate>
         )}
+        {!meta.publishedAt && meta.updatedAt && (
+          <PublishDate>
+            Last Updated:{" "}
+            <span>{format(parseISO(meta.updatedAt), "do MMM yyyy")}</span>
+          </PublishDate>
+        )}
       </header>
     </CardWrapper>
   );
