@@ -1,21 +1,21 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReadTimeResults } from "reading-time";
 
-export interface MDXRawMeta {
+export interface MDXRelatedItem {
   id: string;
   type: string;
   slug: string;
   title: string;
   icon?: string;
-  shareTitle?: string;
   excerpt: string | null;
+}
+export interface MDXRawMeta extends MDXRelatedItem {
+  shareTitle?: string;
   related?: string;
   readingTime?: ReadTimeResults;
   [key: string]: any;
 }
 
-export interface MDXRelatedItem
-  extends Pick<MDXMeta, "title" | "type" | "slug" | "id" | "icon"> {}
 export interface MDXRoute {
   data: MDXRelatedItem | null;
   params: {
