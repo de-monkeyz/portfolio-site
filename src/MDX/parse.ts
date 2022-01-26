@@ -161,6 +161,7 @@ async function loadMeta(name: string): Promise<MDXRelatedItem> {
     type: frontMatter.type,
     title: frontMatter.title,
     slug: frontMatter.slug,
+    excerpt: null,
   };
 }
 
