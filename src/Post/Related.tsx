@@ -65,6 +65,7 @@ const Title = styled.span`
   right: 0;
   text-align: center;
   padding: 8px;
+  background: var(--color-panel);
 `;
 
 const RelatedWrapper = styled.a`
