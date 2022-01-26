@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Head from "next/head";
 import Title from "meta/Title";
@@ -8,6 +8,7 @@ import Centered from "Layout/Centered";
 import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
 import { MDXRelatedItem, MDXMeta, MDXRoute } from "MDX/types";
 import Related from "./Related";
+import Listing from "./Listing";
 import Gif from "./Gif";
 
 export interface PostProps {
@@ -62,32 +63,47 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
         <MDXRemote {...source} components={COMPONENTS} />
       </PostWrapper>
       {!!meta.related.length && (
-        <RelatedItems>
-          {meta.related.map((item) => (
-            <Related key={item.id} item={item} />
-          ))}
-        </RelatedItems>
+        <>
+          <h4>Related</h4>
+          <RelatedItems>
+            {meta.related.map((item) => (
+              <Related key={item.id} item={item} />
+            ))}
+          </RelatedItems>
+        </>
       )}
       {!!pages?.length && (
-        <RelatedItems>
-          {pages.map(
-            (item) =>
-              !!item.data && <Related key={item.data.id} item={item.data} />
-          )}
-        </RelatedItems>
+        <>
+          <h4>All {meta.noun ?? "pages"}</h4>
+          <RelatedItems $layout="horizontal">
+            {pages.map(
+              (item) =>
+                !!item.data && <Listing key={item.data.id} item={item.data} />
+            )}
+          </RelatedItems>
+        </>
       )}
     </Centered>
   );
 };
 
-const RelatedItems = styled.aside`
-  border-top: 2px solid var(--color-panel);
+const RelatedItems = styled.aside<{ $layout?: "horizontal" | "vertical" }>`
   padding-top: 32px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 16px;
   padding-bottom: 32px;
-  transition: border-top-color 0.2s ease-in-out;
+  justify-content: start;
+  display: grid;
+
+  ${(props) =>
+    props.$layout === "horizontal" &&
+    css`
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    `}
+
+  @media(max-width: 500px) {
+    grid-template-columns: 1fr !important;
+  }
 `;
 const PostWrapper = styled.article`
   padding: 32px 0;

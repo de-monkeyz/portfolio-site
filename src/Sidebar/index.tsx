@@ -96,14 +96,6 @@ const Navigation = styled(motion.nav)`
     height: 100vh;
     top: 0;
     z-index: 10;
-
-    --shadow-color: 0deg 0% 0%;
-    --shadow-elevation-medium: -0.8px 0.1px 0.8px
-        hsl(var(--shadow-color) / 0.17),
-      -2.5px 0.3px 2.5px -1.1px hsl(var(--shadow-color) / 0.15),
-      -7.1px 1px 7.2px -2.2px hsl(var(--shadow-color) / 0.13),
-      -18.5px 2.5px 18.8px -3.3px hsl(var(--shadow-color) / 0.11);
-
     box-shadow: var(--shadow-elevation-medium);
   `)}
 `;
@@ -121,6 +113,12 @@ const SidebarWrapper = styled.header`
   position: sticky;
   top: 0;
 
+  --shadow-color: 0deg 0% 0%;
+  --shadow-elevation-medium: -0.8px 0.1px 0.8px hsl(var(--shadow-color) / 0.17),
+    -2.5px 0.3px 2.5px -1.1px hsl(var(--shadow-color) / 0.15),
+    -7.1px 1px 7.2px -2.2px hsl(var(--shadow-color) / 0.13),
+    -18.5px 2.5px 18.8px -3.3px hsl(var(--shadow-color) / 0.11);
+
   ${mobile(
     css`
       z-index: 1;
@@ -128,6 +126,7 @@ const SidebarWrapper = styled.header`
       order: -1;
       min-height: auto;
       padding-bottom: 50px;
+      box-shadow: var(--shadow-elevation-medium);
     `
   )};
 `;
