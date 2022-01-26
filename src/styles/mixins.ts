@@ -7,7 +7,7 @@ export const mobile = (styles: FlattenSimpleInterpolation | string) => css`
 `;
 
 export const notMobile = (styles: FlattenSimpleInterpolation | string) => css`
-  @media (min-width: 1025px) {
+  @media not (max-width: 1024px) {
     ${styles}
   }
 `;
