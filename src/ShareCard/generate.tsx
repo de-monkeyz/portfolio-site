@@ -26,7 +26,7 @@ export async function renderHTML(page: MDXResult) {
       </>
     );
 
-  // Caling this twice as we need styled-components to trigger
+  // Calling this twice as we need styled-components to trigger
   renderToStaticMarkup(render());
   const HTML = renderToStaticMarkup(
     <html>
@@ -67,7 +67,8 @@ export async function checkForThumbnail(slug: string) {
   }
 }
 
-let browser: Browser | null = null;
+let browser: Browser | null = null,
+  browserTab: Page | null = null;
 const OUTPUT_DIR =
   process.env.SHARE_CARD_DIRECTORY ?? `${process.cwd()}/public/share_cards/`;
 export async function generateImage(slug: string): Promise<string | null> {
@@ -77,13 +78,6 @@ export async function generateImage(slug: string): Promise<string | null> {
     return null;
   }
 
-  if (!browser) {
-    browser = await puppeteer.launch({
-      args: ["--disable-dev-shm-usage", "--no-sandbox"],
-    });
-  }
-
-  let browserTab: Page | null = null;
   try {
     const page = await loadAndParse(slug);
     const { frontMatter: meta } = page;
@@ -92,20 +86,29 @@ export async function generateImage(slug: string): Promise<string | null> {
       return null;
     }
 
+    if (!browser) {
+      console.log("Opening the browser...");
+      browser = await puppeteer.launch({
+        args: ["--disable-dev-shm-usage", "--no-sandbox"],
+      });
+    }
+
+    if (!browserTab) {
+      browserTab = await browser.newPage();
+      await browserTab.setViewport({ width: 1200, height: 630 });
+      await browserTab.emulateMediaFeatures([
+        { name: "prefers-color-scheme", value: "dark" },
+      ]);
+
+      // Load a blank HTML file first to stop issues with localStorage and file://
+      await browserTab.goto(
+        `file://${path.join(process.cwd(), "assets/blank.html")}`
+      );
+    }
+
     const hash = createHash("md5").update(slug).digest("hex");
     const file = path.join(OUTPUT_DIR, `${hash}.png`);
     const publicUrl = `${process.env.PUBLIC_URL}/share_cards/${hash}.png`;
-
-    browserTab = await browser.newPage();
-    await browserTab.setViewport({ width: 1200, height: 630 });
-    await browserTab.emulateMediaFeatures([
-      { name: "prefers-color-scheme", value: "dark" },
-    ]);
-
-    // Load a blank HTML file first to stop issues with localStorage and file://
-    await browserTab.goto(
-      `file://${path.join(process.cwd(), "assets/blank.html")}`
-    );
 
     await browserTab.setContent(await renderHTML(page));
 
@@ -116,14 +119,6 @@ export async function generateImage(slug: string): Promise<string | null> {
     return publicUrl;
   } catch (e: any) {
     console.error(e);
-  } finally {
-    if (browserTab) {
-      try {
-        await browserTab.close();
-      } catch (e) {
-        console.warn("Could not close browser tab");
-      }
-    }
   }
 
   return null;
