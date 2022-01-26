@@ -58,7 +58,7 @@ const Card: React.FC<CardProps> = ({ useFileURL, page, thumbnail }) => {
 
 const Title = styled.div`
   display: flex;
-  font-size: 24px;
+  font-size: 38px;
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
@@ -79,7 +79,7 @@ const CardWrapper = styled.div`
   justify-content: center;
 
   h1 {
-    font-size: 24px;
+    font-size: 38px;
     max-width: 650px;
   }
 
@@ -89,7 +89,7 @@ const CardWrapper = styled.div`
   }
 
   h2 {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
   }
 
@@ -185,7 +185,7 @@ const ReadingTime = styled.time`
 const PublishDate = styled.time`
   margin-top: 16px;
   display: block;
-  font-size: 14px;
+  font-size: 18px;
   opacity: 0.5;
 `;
 
