@@ -39,13 +39,22 @@ async function loadRelatedItems(ids?: string): Promise<Array<MDXRelatedItem>> {
   }
 
   const identifiers = ids.split(",").map((id) => id.trim());
-  const loaders: Array<Promise<MDXRelatedItem>> = [];
+  const loaders: Array<Promise<MDXRelatedItem | null>> = [];
+
+  const loadOrNull = async (item: string) => {
+    try {
+      return await loadMeta(item);
+    } catch (e) {
+      return null;
+    }
+  };
+
   for (const item of identifiers) {
-    loaders.push(loadMeta(item));
+    loaders.push(loadOrNull(item));
   }
 
-  const loaded = await Promise.all(loaders);
-  return loaded;
+  const loaded: Array<MDXRelatedItem | null> = await Promise.all(loaders);
+  return loaded.filter((l) => l) as Array<MDXRelatedItem>;
 }
 
 async function processMatter(data: MDXRawMeta, loadRelated?: boolean) {
