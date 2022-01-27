@@ -9,7 +9,7 @@ import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
 import { MDXRelatedItem, MDXMeta, MDXRoute } from "MDX/types";
 import Related from "./Related";
 import Listing from "./Listing";
-import Gif from "./Gif";
+import Components from "./components";
 
 export interface PostProps {
   source: MDXRemoteSerializeResult;
@@ -23,10 +23,6 @@ export interface PostProps {
   };
   pages?: Array<MDXRoute>;
 }
-
-const COMPONENTS: { [key: string]: ReactNode } = {
-  Gif: Gif,
-};
 
 const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
   const description = meta.description || meta.excerpt;
@@ -60,11 +56,11 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
       </Head>
       <PostWrapper>
         {meta.title && <h1>{meta.title}</h1>}
-        <MDXRemote {...source} components={COMPONENTS} />
+        <MDXRemote {...source} components={Components} />
       </PostWrapper>
       {!!meta.related.length && (
         <>
-          <h4>Related</h4>
+          <h4 id="related">Related</h4>
           <RelatedItems>
             {meta.related.map((item) => (
               <Related key={item.id} item={item} />
@@ -74,7 +70,7 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
       )}
       {!!pages?.length && (
         <>
-          <h4>All {meta.noun ?? "pages"}</h4>
+          <h4 id="pages">All {meta.noun ?? "pages"}</h4>
           <RelatedItems $layout="horizontal">
             {pages.map(
               (item) =>

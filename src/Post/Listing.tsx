@@ -53,7 +53,7 @@ const ListingWrapper = styled.a`
   overflow: hidden;
   color: var(--color-foreground);
   box-shadow: var(--effect-lowShadow);
-  ${transitionTheme()}
+  ${transitionTheme(["color", "background-color", "box-shadow"])}
   text-decoration: none;
   font-size: var(--heading-4);
   display: flex;

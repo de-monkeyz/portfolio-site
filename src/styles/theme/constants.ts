@@ -35,6 +35,22 @@ export const COLORS = {
     light: "#F7F7F7",
     dark: "#3F464D",
   },
+  notice: {
+    light: "hsla(225, 50%, 59%, 1)",
+    dark: "hsla(225, 50%, 48%, 1)",
+  },
+  warning: {
+    light: "hsla(30, 100%, 51%, 1)",
+    dark: "hsla(45, 98%, 57%, 1)",
+  },
+  error: {
+    light: "hsla(351, 98%, 44%, 1)",
+    dark: "hsla(351, 98%, 44%, 1)",
+  },
+  success: {
+    light: "hsla(112, 86%, 35%, 1)",
+    dark: "hsla(112, 86%, 43%, 1)",
+  },
 };
 
 export const EFFECTS = {

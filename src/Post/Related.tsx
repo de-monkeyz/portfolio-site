@@ -85,7 +85,7 @@ const RelatedWrapper = styled.a`
   border-radius: 3px;
   overflow: hidden;
   color: var(--color-foreground);
-  ${transitionTheme()}
+  ${transitionTheme(["color", "background-color", "box-shadow"])}
   box-shadow: var(--effect-lowShadow);
   gap: 32px;
   text-decoration: none;

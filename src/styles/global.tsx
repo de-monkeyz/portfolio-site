@@ -4,6 +4,7 @@ import {
   createGlobalStyle,
   FlattenSimpleInterpolation,
 } from "styled-components";
+import { transitionTheme } from "./mixins";
 
 const globalCss: FlattenSimpleInterpolation = css`
   :root {
@@ -14,6 +15,7 @@ const globalCss: FlattenSimpleInterpolation = css`
     --heading-3: 1.71rem;
     --heading-4: 1.29rem;
     --paragraph: 1rem;
+    --small-text: 0.8rem;
 
     /* Effect styles */
     --light---animation--inner--shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.46);
@@ -66,7 +68,7 @@ const globalCss: FlattenSimpleInterpolation = css`
     font-size: 14px;
     line-height: 1.5;
 
-    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+    ${transitionTheme()}
   }
 
   * {
@@ -78,6 +80,15 @@ const globalCss: FlattenSimpleInterpolation = css`
     &:focus-visible {
       outline: 2px solid var(--color-secondary);
       outline-offset: 3px;
+    }
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    ${transitionTheme()}
+    &:hover {
+      text-decoration: none;
     }
   }
 `;
