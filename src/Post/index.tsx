@@ -6,10 +6,12 @@ import Title from "meta/Title";
 import Centered from "Layout/Centered";
 
 import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
-import { MDXSummary, MDXMeta, MDXRoute } from "MDX/types";
+import { MDXSummary, MDXMeta, MDXRoute, MDXPagination } from "MDX/types";
 import Related from "./Related";
 import Listing from "./Listing";
 import Components from "./components";
+import Pagination from "../MDX/Pagination";
+import { notMobile } from "styles/mixins";
 
 export interface PostProps {
   source: MDXRemoteSerializeResult;

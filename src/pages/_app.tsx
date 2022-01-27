@@ -78,9 +78,9 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         <GlobalStyle />
         <ThemeToggle />
         <App columns="var(--layout-columns)">
-          <main>
+          <Main>
             <Component {...pageProps} />
-          </main>
+          </Main>
           <Sidebar />
           <Footer />
         </App>
@@ -89,6 +89,15 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   );
 }
 
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  & > * {
+    width: 100%;
+    flex: 0;
+  }
+`;
 const App = styled(Columns)`
   ${mobile(`--layout-columns: 1fr !important;`)}
   align-items: start;

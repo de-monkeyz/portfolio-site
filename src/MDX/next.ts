@@ -1,42 +1,74 @@
 import { GetStaticProps } from "next";
-import { MDXListOptions, MDXProps, MDXSummary } from "./types";
+import { MDXListOptions, MDXProps, MDXPageList } from "./types";
 
 import { list, loadAndParse } from "./parse";
 
 async function getIndexPages(
   type: string,
   slug: string | string[],
+  page: number,
   options: MDXListOptions = {}
-): Promise<Partial<MDXSummary>[] | null> {
+): Promise<MDXPageList> {
   if (slug !== "index") {
-    return null;
+    return { pages: null, pagination: null };
   }
-  const items = await list(type, {
+  const pages = await list(type, {
     ...options,
     excludeIndex: true,
     withMeta: true,
   });
-  return items;
+
+  if (page > 0) {
+    const start = (page - 1) * ITEMS_PER_PAGE;
+    const total = Math.ceil(pages.length / ITEMS_PER_PAGE);
+    return {
+      pages: pages.slice(start, start + ITEMS_PER_PAGE),
+      pagination: {
+        current: page,
+        total: total,
+      },
+    };
+  }
+
+  return { pages, pagination: null };
 }
 
+const ITEMS_PER_PAGE = 1;
 function createStaticProps(
   nameOrCategory: string,
   multi?: boolean,
+  paginated?: boolean,
   options: MDXListOptions = {}
 ) {
   const staticProps: GetStaticProps<MDXProps> = async ({ params = {} }) => {
-    const slug = params.slug ?? "index";
+    let [slug = "index", page = ""] = Array.isArray(params.slug)
+      ? params.slug
+      : [params.slug];
+
+    // Pagination enabled
+    if (paginated) {
+      slug = "index";
+    }
     const toLoad = multi ? `${nameOrCategory}/${slug}` : nameOrCategory;
     try {
       const data = await loadAndParse(toLoad);
+      let pages = null,
+        pagination = null;
+      if (multi) {
+        ({ pagination, pages } = await getIndexPages(
+          nameOrCategory,
+          slug,
+          paginated ? parseInt(page, 10) || 1 : -1,
+          options
+        ));
+      }
       return {
         props: {
+          pagination,
           source: data?.source,
           meta: data?.frontMatter,
           error: false,
-          pages: multi
-            ? await getIndexPages(nameOrCategory, slug, options)
-            : null,
+          pages: pages,
         } as MDXProps,
       };
     } catch (e) {
@@ -49,26 +81,44 @@ function createStaticProps(
   };
   return staticProps;
 }
-function createStaticPaths(type: string, includeIndex?: boolean) {
+function createStaticPaths(
+  type: string,
+  includeIndex?: boolean,
+  pagination?: boolean
+) {
   return async function () {
     const items = await list(type, {
       withMeta: true,
     });
-    return {
-      paths: [
-        ...(includeIndex
-          ? [
-              {
-                params: { slug: [] },
-              },
-            ]
-          : []),
-        ...items.map((item) => ({
+
+    const paths = [
+      ...(includeIndex
+        ? [
+            {
+              params: { slug: [] },
+            },
+          ]
+        : []),
+      ...items.map((item) => ({
+        params: {
+          slug: [item.slug],
+        },
+      })),
+    ];
+
+    if (pagination) {
+      const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
+      for (let i = 1; i <= totalPages; i++) {
+        paths.push({
           params: {
-            slug: [item.slug],
+            slug: ["page", i.toString()],
           },
-        })),
-      ],
+        });
+      }
+    }
+
+    return {
+      paths: paths,
       fallback: false,
     };
   };
