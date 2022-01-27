@@ -39,7 +39,7 @@ export interface MDXProps {
   source?: MDXRemoteSerializeResult;
   meta?: MDXMeta;
   error: boolean;
-  pages?: Array<MDXRoute>;
+  pages?: Array<MDXSummary>;
 }
 
 export type MDXParseOptions = {

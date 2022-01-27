@@ -21,7 +21,7 @@ export interface PostProps {
     updatedAt?: string;
     related: Array<MDXSummary>;
   };
-  pages?: Array<MDXRoute>;
+  pages?: Array<MDXSummary>;
 }
 
 const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
@@ -77,10 +77,9 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
         <>
           <h4 id="pages">All {meta.noun ?? "pages"}</h4>
           <RelatedItems $layout="horizontal">
-            {pages.map(
-              (item) =>
-                !!item.data && <Listing key={item.data.id} item={item.data} />
-            )}
+            {pages.map((item) => (
+              <Listing key={item.id} item={item} />
+            ))}
           </RelatedItems>
         </>
       )}

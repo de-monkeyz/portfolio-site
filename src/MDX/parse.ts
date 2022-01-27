@@ -20,6 +20,7 @@ import {
 
 function ignoreDraftsInProduction(page: MDXListItem) {
   if (process.env.NODE_ENV !== "production") {
+    console.log("Allow when not in prod");
     return true;
   }
 

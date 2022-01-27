@@ -2,7 +2,7 @@
   "name": "portfolio-site",
   "private": true,
   "scripts": {
-    "dev": "next-remote-watch ./data/mdx/",
+    "dev": "NODE_ENV=development next-remote-watch ./data/mdx/",
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",

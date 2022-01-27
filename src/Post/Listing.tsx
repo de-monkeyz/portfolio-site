@@ -69,16 +69,19 @@ const ListingWrapper = styled.a<{ $draft?: boolean }>`
       &::after {
         content: "Draft";
         position: absolute;
-        top: 8px;
-        right: 8px;
-        padding: 8px;
+        top: 2px;
+        left: 2px;
+        padding: 2px;
         color: var(--color-warning);
-        border: 1px solid;
+        border: 2px solid;
         border-radius: 3px;
         font-size: 12px;
         line-height: 1em;
-        width: 84px;
-        height: 84px;
+        width: 96px;
+        height: 96px;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
       }
     `}
 `;
