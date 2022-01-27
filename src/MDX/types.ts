@@ -10,6 +10,7 @@ export interface MDXSummary {
   draft: boolean;
   excerpt: string | null;
 }
+export type MDXListItem = Partial<MDXSummary>;
 export interface MDXRawMeta extends MDXSummary {
   shareTitle?: string;
   related?: string;
@@ -48,4 +49,11 @@ export type MDXParseOptions = {
 
 export interface MDXStaticPathsOptions {
   filter?: (route: MDXRoute) => boolean;
+}
+
+export interface MDXListOptions {
+  excludeIndex?: boolean;
+  withMeta?: boolean;
+  filter?: (item: MDXListItem) => boolean;
+  sort?: (item: MDXListItem) => number;
 }

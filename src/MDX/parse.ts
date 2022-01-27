@@ -15,15 +15,13 @@ import {
   MDXSummary,
   MDXParseOptions,
   MDXRoute,
+  MDXListItem,
+  MDXListOptions,
 } from "./types";
 
-function ignoreDraftsInProduction(page: MDXRoute | MDXSummary) {
+function ignoreDraftsInProduction(page: MDXListItem) {
   if (process.env.NODE_ENV !== "production") {
     return true;
-  }
-
-  if ("data" in page) {
-    return !page.data?.draft;
   }
 
   return !page.draft;
@@ -190,34 +188,35 @@ async function loadAndParse(name: string): Promise<MDXResult> {
 
 async function list(
   category: string,
-  withMeta?: boolean,
-  excludeIndex?: boolean
-): Promise<Array<MDXRoute>> {
+  options: MDXListOptions = {}
+): Promise<Array<MDXListItem>> {
   try {
     const directory = path.join(MDX_DIR, `/${category}/`);
     const files = await fs.promises.readdir(directory);
 
-    const items: Array<MDXRoute> = [];
+    const items: Array<MDXListItem> = [];
     for (const filename of files) {
-      if (excludeIndex && filename === "index.mdx") {
+      if (options.excludeIndex && filename === "index.mdx") {
         continue;
       }
       const slug = filename.replace(/\.mdx$/, "");
-      let data = {};
-      if (withMeta) {
+      let data = { slug };
+      if (options.withMeta) {
         const name = `${category}/${slug}`;
         const content = await load(name);
-        ({ data } = await parseMatter(content, name));
+        data = {
+          ...(await parseMatter(content, name)),
+          ...data,
+        };
       }
-      items.push({
-        data: withMeta ? (data as MDXSummary) : null,
-        params: {
-          slug: [slug],
-        },
-      });
+      items.push(data);
     }
 
-    return items.filter(ignoreDraftsInProduction);
+    if (options.sort) {
+      items.sort(options.sort);
+    }
+
+    return items.filter(options.filter || ignoreDraftsInProduction);
   } catch (e) {
     // Ignore error
   }

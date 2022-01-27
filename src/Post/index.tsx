@@ -55,6 +55,11 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
         )}
       </Head>
       <PostWrapper>
+        {meta.draft && (
+          <Components.Warning>
+            This post is a draft. It will not be available in production builds.
+          </Components.Warning>
+        )}
         {meta.title && <h1>{meta.title}</h1>}
         <MDXRemote {...source} components={Components} />
       </PostWrapper>

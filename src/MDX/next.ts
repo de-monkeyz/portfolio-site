@@ -1,9 +1,29 @@
 import { GetStaticProps } from "next";
-import { MDXProps } from "./types";
+import { MDXListOptions, MDXProps, MDXSummary } from "./types";
 
 import { list, loadAndParse } from "./parse";
 
-function createStaticProps(nameOrCategory: string, multi?: boolean) {
+async function getIndexPages(
+  type: string,
+  slug: string | string[],
+  options: MDXListOptions = {}
+): Promise<Partial<MDXSummary>[] | null> {
+  if (slug !== "index") {
+    return null;
+  }
+  const items = await list(type, {
+    ...options,
+    excludeIndex: true,
+    withMeta: true,
+  });
+  return items;
+}
+
+function createStaticProps(
+  nameOrCategory: string,
+  multi?: boolean,
+  options: MDXListOptions = {}
+) {
   const staticProps: GetStaticProps<MDXProps> = async ({ params = {} }) => {
     const slug = params.slug ?? "index";
     const toLoad = multi ? `${nameOrCategory}/${slug}` : nameOrCategory;
@@ -14,10 +34,9 @@ function createStaticProps(nameOrCategory: string, multi?: boolean) {
           source: data?.source,
           meta: data?.frontMatter,
           error: false,
-          pages:
-            multi && slug === "index"
-              ? await list(nameOrCategory, true, true)
-              : null,
+          pages: multi
+            ? await getIndexPages(nameOrCategory, slug, options)
+            : null,
         } as MDXProps,
       };
     } catch (e) {
@@ -43,7 +62,9 @@ function createStaticPaths(type: string, includeIndex?: boolean) {
             ]
           : []),
         ...items.map((item) => ({
-          params: item.params,
+          params: {
+            slug: [item.slug],
+          },
         })),
       ],
       fallback: false,
