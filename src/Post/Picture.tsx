@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Image from "next/image";
 import { addUnit } from "util/css";
 
@@ -12,6 +12,7 @@ export interface PictureProps {
   aspect?: number;
 }
 
+const MAX_WIDTH = 760;
 const Picture: React.FC<PictureProps> = ({
   src,
   alt,
@@ -20,22 +21,33 @@ const Picture: React.FC<PictureProps> = ({
   height,
   aspect = 16 / 9,
 }) => {
+  const portrait = aspect < 1;
+
+  function getSizes() {
+    if (portrait) {
+      return `(min-width: 1500px) ${Math.ceil(MAX_WIDTH * aspect)}px,50vw,30vw`;
+    }
+
+    return `(min-width: 1500px) ${MAX_WIDTH},50vw,30vw`;
+  }
+
   return (
     <PictureWrapper
+      $portrait={portrait}
       style={{
         ["--aspect" as any]: aspect,
         ["--width" as any]: addUnit(width),
         ["--height" as any]: addUnit(height),
       }}
     >
-      <Frame>
+      <Frame $portrait={portrait}>
         <Image
           alt={alt ?? caption ?? ""}
           src={src}
           width={width}
           height={height}
-          layout={width || height ? "intrinsic" : "fill"}
-          sizes="(min-width: 1500px) 760px,50vw,30vw"
+          layout={width && height ? "intrinsic" : "fill"}
+          sizes={getSizes()}
           objectFit="cover"
         />
       </Frame>
@@ -44,22 +56,28 @@ const Picture: React.FC<PictureProps> = ({
   );
 };
 
-const PictureWrapper = styled.div`
-  width: 80%;
+const PictureWrapper = styled.div<{ $portrait: boolean }>`
+  width: var(--width, 80%);
   margin: 0 auto;
-
   padding: 32px 0;
   overflow: hidden;
+  ${(props) =>
+    props.$portrait &&
+    css`
+      width: var(--width, calc(80% * var(--aspect)));
+    `}
 `;
 
-const Frame = styled.div`
+const Frame = styled.div<{ $portrait: boolean }>`
   margin: auto;
-  width: var(--width, 100%);
   height: var(--height, auto);
+  width: 100%;
+
   background: var(--color-empty);
   position: relative;
   overflow: hidden;
   border-radius: 3px;
+
   &::before {
     content: "";
     width: 0;
