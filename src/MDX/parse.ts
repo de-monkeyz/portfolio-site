@@ -104,11 +104,11 @@ async function parseMatter(
 
   const parsed = await processMatter(
     {
+      ...data,
       id: name,
       slug,
       type,
       excerpt: textExcerpt,
-      ...data,
     } as MDXRawMeta,
     loadRelated
   );
@@ -138,12 +138,13 @@ async function parse(
     options.parseContent ?? true
       ? await serialize(content, { scope: data })
       : null;
+
   return {
     source,
     frontMatter: {
       readingTime: readingTime(content),
-      excerpt,
       ...data,
+      excerpt,
     },
   };
 }
@@ -161,7 +162,7 @@ async function loadMeta(name: string): Promise<MDXRelatedItem> {
     type: frontMatter.type,
     title: frontMatter.title,
     slug: frontMatter.slug,
-    excerpt: null,
+    excerpt: frontMatter.excerpt ?? null,
   };
 }
 
