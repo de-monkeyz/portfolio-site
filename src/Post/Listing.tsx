@@ -74,7 +74,7 @@ const Details = styled.span`
   padding: 0 16px;
 `;
 
-const More = styled.button.attrs({ type: "button" })`
+const More = styled.button.attrs({ type: "button", tabIndex: -1 })`
   min-width: 100px;
   height: 100px;
   background: none;

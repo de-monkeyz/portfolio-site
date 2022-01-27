@@ -75,7 +75,7 @@ const globalCss: FlattenSimpleInterpolation = css`
 
   a,
   button {
-    &:focus {
+    &:focus-visible {
       outline: 2px solid var(--color-secondary);
       outline-offset: 3px;
     }
