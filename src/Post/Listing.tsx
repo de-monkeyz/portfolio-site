@@ -1,5 +1,5 @@
 import { MDXSummary } from "MDX/types";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Link from "next/link";
 import { transitionTheme } from "styles/mixins";
@@ -21,6 +21,7 @@ const Listing: React.FC<ListingProps> = ({ item }) => {
   return (
     <Link href={`/${item.id}`} passHref={true}>
       <ListingWrapper
+        $draft={item.draft}
         style={{
           ["--background" as any]: color,
         }}
@@ -46,7 +47,7 @@ const Title = styled.span`
   font-size: 14px;
 `;
 
-const ListingWrapper = styled.a`
+const ListingWrapper = styled.a<{ $draft?: boolean }>`
   height: 100px;
   position: relative;
   border-radius: 3px;
@@ -61,6 +62,25 @@ const ListingWrapper = styled.a`
   gap: 0;
   background: var(--color-panel);
   perspective: 10000px;
+
+  ${(props) =>
+    props.$draft &&
+    css`
+      &::after {
+        content: "Draft";
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        padding: 8px;
+        color: var(--color-warning);
+        border: 1px solid;
+        border-radius: 3px;
+        font-size: 12px;
+        line-height: 1em;
+        width: 84px;
+        height: 84px;
+      }
+    `}
 `;
 
 const Details = styled.span`

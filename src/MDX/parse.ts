@@ -14,7 +14,6 @@ import {
   MDXMeta,
   MDXSummary,
   MDXParseOptions,
-  MDXRoute,
   MDXListItem,
   MDXListOptions,
 } from "./types";
@@ -204,8 +203,9 @@ async function list(
       if (options.withMeta) {
         const name = `${category}/${slug}`;
         const content = await load(name);
+        const { data: meta } = await parseMatter(content, name);
         data = {
-          ...(await parseMatter(content, name)),
+          ...meta,
           ...data,
         };
       }

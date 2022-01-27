@@ -71,7 +71,9 @@ const globalCss: FlattenSimpleInterpolation = css`
     ${transitionTheme()}
   }
 
-  * {
+  *,
+  *::after,
+  *::before {
     box-sizing: border-box;
   }
 

@@ -82,12 +82,11 @@ export async function generateImage(slug: string): Promise<string | null> {
     const page = await loadAndParse(slug);
     const { frontMatter: meta } = page;
     if (!meta.title) {
-      console.log("Erroneous front matter", meta);
+      console.warn("Erroneous front matter", meta);
       return null;
     }
 
     if (!browser) {
-      console.log("Opening the browser...");
       browser = await puppeteer.launch({
         args: ["--disable-dev-shm-usage", "--no-sandbox"],
       });

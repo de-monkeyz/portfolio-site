@@ -51,7 +51,9 @@ function createStaticProps(
 }
 function createStaticPaths(type: string, includeIndex?: boolean) {
   return async function () {
-    const items = await list(type);
+    const items = await list(type, {
+      withMeta: true,
+    });
     return {
       paths: [
         ...(includeIndex

@@ -1,6 +1,6 @@
 import { MDXSummary } from "MDX/types";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import Link from "next/link";
 import { transitionTheme } from "styles/mixins";
@@ -20,6 +20,7 @@ const Related: React.FC<RelatedProps> = ({ item }) => {
   return (
     <Link href={`/${item.id}`} passHref={true}>
       <RelatedWrapper
+        $draft={item.draft}
         style={{
           ["--background" as any]: color,
         }}
@@ -81,7 +82,7 @@ const Title = styled.h6`
   font-size: var(--paragraph);
 `;
 
-const RelatedWrapper = styled.a`
+const RelatedWrapper = styled.a<{ $draft?: boolean }>`
   position: relative;
   border-radius: 3px;
   overflow: hidden;
@@ -92,6 +93,23 @@ const RelatedWrapper = styled.a`
   text-decoration: none;
   font-size: var(--heading-4);
   padding-bottom: 40px;
+
+  ${(props) =>
+    props.$draft &&
+    css`
+      &::after {
+        content: "Draft";
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        padding: 8px;
+        color: var(--color-warning);
+        border: 1px solid;
+        border-radius: 3px;
+        font-size: 12px;
+        line-height: 1em;
+      }
+    `}
 
   &:hover,
   &:active {
