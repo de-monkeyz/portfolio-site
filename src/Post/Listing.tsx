@@ -1,4 +1,4 @@
-import { MDXRelatedItem } from "MDX/types";
+import { MDXSummary } from "MDX/types";
 import styled from "styled-components";
 
 import Link from "next/link";
@@ -8,7 +8,7 @@ import ThumbnailOrIcon from "./ThumbnailOrIcon";
 import NextIcon from "assets/icons/next.svg";
 
 export interface ListingProps {
-  item: MDXRelatedItem;
+  item: MDXSummary;
 }
 
 const COLORS: { [key: string]: string } = {

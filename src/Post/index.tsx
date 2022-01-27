@@ -6,7 +6,7 @@ import Title from "meta/Title";
 import Centered from "Layout/Centered";
 
 import { MDXRemoteSerializeResult, MDXRemote } from "next-mdx-remote";
-import { MDXRelatedItem, MDXMeta, MDXRoute } from "MDX/types";
+import { MDXSummary, MDXMeta, MDXRoute } from "MDX/types";
 import Related from "./Related";
 import Listing from "./Listing";
 import Components from "./components";
@@ -19,7 +19,7 @@ export interface PostProps {
     image?: string;
     publishedAt: string;
     updatedAt?: string;
-    related: Array<MDXRelatedItem>;
+    related: Array<MDXSummary>;
   };
   pages?: Array<MDXRoute>;
 }

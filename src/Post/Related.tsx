@@ -1,4 +1,4 @@
-import { MDXRelatedItem } from "MDX/types";
+import { MDXSummary } from "MDX/types";
 import React from "react";
 import styled from "styled-components";
 
@@ -7,7 +7,7 @@ import { transitionTheme } from "styles/mixins";
 import ThumbnailOrIcon from "./ThumbnailOrIcon";
 
 export interface RelatedProps {
-  item: MDXRelatedItem;
+  item: MDXSummary;
 }
 
 const COLORS: { [key: string]: string } = {

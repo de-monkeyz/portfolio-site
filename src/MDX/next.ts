@@ -30,7 +30,6 @@ function createStaticProps(nameOrCategory: string, multi?: boolean) {
   };
   return staticProps;
 }
-
 function createStaticPaths(type: string, includeIndex?: boolean) {
   return async function () {
     const items = await list(type);

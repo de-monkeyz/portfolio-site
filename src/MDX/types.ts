@@ -1,15 +1,16 @@
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { ReadTimeResults } from "reading-time";
 
-export interface MDXRelatedItem {
+export interface MDXSummary {
   id: string;
   type: string;
   slug: string;
   title: string;
   icon?: string;
+  draft: boolean;
   excerpt: string | null;
 }
-export interface MDXRawMeta extends MDXRelatedItem {
+export interface MDXRawMeta extends MDXSummary {
   shareTitle?: string;
   related?: string;
   readingTime?: ReadTimeResults;
@@ -17,19 +18,19 @@ export interface MDXRawMeta extends MDXRelatedItem {
 }
 
 export interface MDXRoute {
-  data: MDXRelatedItem | null;
+  data: MDXSummary | null;
   params: {
     slug: Array<string>;
   };
 }
 export interface MDXMeta extends Omit<MDXRawMeta, "related"> {
-  related: Array<MDXRelatedItem>;
+  related: Array<MDXSummary>;
 }
 
 export interface MDXResult {
   source: MDXRemoteSerializeResult | null;
   frontMatter: MDXMeta;
-  pages?: Array<MDXRelatedItem>;
+  pages?: Array<MDXSummary>;
   [key: string]: any;
 }
 
@@ -44,3 +45,7 @@ export type MDXParseOptions = {
   loadRelated?: boolean;
   parseContent?: boolean;
 };
+
+export interface MDXStaticPathsOptions {
+  filter?: (route: MDXRoute) => boolean;
+}

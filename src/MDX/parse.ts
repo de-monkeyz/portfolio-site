@@ -12,10 +12,22 @@ import {
   MDXResult,
   MDXRawMeta,
   MDXMeta,
-  MDXRelatedItem,
+  MDXSummary,
   MDXParseOptions,
   MDXRoute,
 } from "./types";
+
+function ignoreDraftsInProduction(page: MDXRoute | MDXSummary) {
+  if (process.env.NODE_ENV !== "production") {
+    return true;
+  }
+
+  if ("data" in page) {
+    return !page.data?.draft;
+  }
+
+  return !page.draft;
+}
 
 function nameToTypeAndSlug(name: string): [string, string] {
   let [typeOrSlug, slug] = name.split("/");
@@ -33,13 +45,13 @@ async function load(name: string): Promise<string> {
   return await fs.promises.readFile(fileToLoad, "utf-8");
 }
 
-async function loadRelatedItems(ids?: string): Promise<Array<MDXRelatedItem>> {
+async function loadRelatedItems(ids?: string): Promise<Array<MDXSummary>> {
   if (!ids || typeof ids !== "string") {
     return [];
   }
 
   const identifiers = ids.split(",").map((id) => id.trim());
-  const loaders: Array<Promise<MDXRelatedItem | null>> = [];
+  const loaders: Array<Promise<MDXSummary | null>> = [];
 
   const loadOrNull = async (item: string) => {
     try {
@@ -53,8 +65,10 @@ async function loadRelatedItems(ids?: string): Promise<Array<MDXRelatedItem>> {
     loaders.push(loadOrNull(item));
   }
 
-  const loaded: Array<MDXRelatedItem | null> = await Promise.all(loaders);
-  return loaded.filter((l) => l) as Array<MDXRelatedItem>;
+  const loaded: Array<MDXSummary> = (await Promise.all(loaders)).filter(
+    (l) => l !== null
+  ) as Array<MDXSummary>;
+  return loaded.filter(ignoreDraftsInProduction);
 }
 
 async function processMatter(data: MDXRawMeta, loadRelated?: boolean) {
@@ -149,7 +163,7 @@ async function parse(
   };
 }
 
-async function loadMeta(name: string): Promise<MDXRelatedItem> {
+async function loadMeta(name: string): Promise<MDXSummary> {
   const source = await load(name);
   const { frontMatter } = await parse(source, name, {
     loadRelated: false,
@@ -162,6 +176,7 @@ async function loadMeta(name: string): Promise<MDXRelatedItem> {
     type: frontMatter.type,
     title: frontMatter.title,
     slug: frontMatter.slug,
+    draft: frontMatter.draft ?? false,
     excerpt: frontMatter.excerpt ?? null,
   };
 }
@@ -195,14 +210,14 @@ async function list(
         ({ data } = await parseMatter(content, name));
       }
       items.push({
-        data: withMeta ? (data as MDXRelatedItem) : null,
+        data: withMeta ? (data as MDXSummary) : null,
         params: {
           slug: [slug],
         },
       });
     }
 
-    return items;
+    return items.filter(ignoreDraftsInProduction);
   } catch (e) {
     // Ignore error
   }
