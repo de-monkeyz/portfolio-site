@@ -44,8 +44,8 @@ const Picture: React.FC<PictureProps> = ({
         <Image
           alt={alt ?? caption ?? ""}
           src={src}
-          width={width}
-          height={height}
+          width={width && height ? width : void 0}
+          height={width && height ? height : void 0}
           layout={width && height ? "intrinsic" : "fill"}
           sizes={getSizes()}
           objectFit="cover"

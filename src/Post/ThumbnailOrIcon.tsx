@@ -35,7 +35,6 @@ const ThumbnailOrIcon: React.FC<ThumbnailOrIconProps> = ({
           layout="intrinsic"
           objectFit="cover"
           quality={90}
-          onError={global.alert}
         />
       </Thumbnail>
     </Tile>
