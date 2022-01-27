@@ -48,7 +48,8 @@ const Summary = styled.p`
   top: 0;
   left: 0;
   right: 0;
-  bottom: 44px;
+  bottom: 40px;
+  margin: 0;
   background: rgba(0, 0, 0, 0.8);
   color: var(--color-foreground);
   padding: 16px;
@@ -90,6 +91,7 @@ const RelatedWrapper = styled.a`
   gap: 32px;
   text-decoration: none;
   font-size: var(--heading-4);
+  padding-bottom: 40px;
 
   &:hover,
   &:active {
