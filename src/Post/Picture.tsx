@@ -10,6 +10,7 @@ export interface PictureProps {
   width?: number;
   height?: number;
   aspect?: number;
+  quality?: number;
 }
 
 const MAX_WIDTH = 760;
@@ -20,6 +21,7 @@ const Picture: React.FC<PictureProps> = ({
   width,
   height,
   aspect = 16 / 9,
+  quality = 80,
 }) => {
   const portrait = aspect < 1;
 
@@ -49,6 +51,7 @@ const Picture: React.FC<PictureProps> = ({
           layout={width && height ? "intrinsic" : "fill"}
           sizes={getSizes()}
           objectFit="cover"
+          quality={quality}
         />
       </Frame>
       {caption && <Caption>{caption}</Caption>}
