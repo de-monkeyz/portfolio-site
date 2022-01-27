@@ -72,6 +72,14 @@ const globalCss: FlattenSimpleInterpolation = css`
   * {
     box-sizing: border-box;
   }
+
+  a,
+  button {
+    &:focus {
+      outline: 2px solid var(--color-secondary);
+      outline-offset: 3px;
+    }
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`${globalCss}`;

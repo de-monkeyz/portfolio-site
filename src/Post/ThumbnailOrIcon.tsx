@@ -1,7 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 import Image from "next/image";
 import SVGIcon from "UI/Icon";
+import { transitionTheme } from "styles/mixins";
+
+import PageIcon from "assets/icons/page.svg";
 
 export interface ThumbnailOrIconProps {
   id: string;
@@ -23,30 +25,32 @@ const ThumbnailOrIcon: React.FC<ThumbnailOrIconProps> = ({
         ["--size" as any]: size === true ? "100%" : `${size}px`,
       }}
     >
-      {icon && <Icon name={icon} />}
+      <Icon name={icon} fallback={PageIcon} />
       <Thumbnail>
         <Image
           width={size === true ? 350 : size}
           height={size === true ? 350 : size}
           src={`/thumbnails/${id}.jpg`}
           alt=""
-          layout="responsive"
+          layout="intrinsic"
           objectFit="cover"
           quality={90}
+          onError={global.alert}
         />
       </Thumbnail>
     </Tile>
   );
 };
 
-const Tile = styled.span`
+const Tile = styled.div`
   box-sizing: content-box;
   min-width: var(--size, 100%);
   max-width: var(--size, 100%);
   display: block;
   position: relative;
   overflow: hidden;
-  background-color: var(--background, var(--color-foreground));
+  background-color: var(--color-empty);
+  ${transitionTheme()}
   &::before {
     content: "";
     display: block;
@@ -64,9 +68,10 @@ const Icon = styled(SVGIcon)`
   bottom: 0;
   margin: auto;
   color: var(--color-foreground);
+  ${transitionTheme()}
 `;
 
-const Thumbnail = styled.span`
+const Thumbnail = styled.div`
   display: block;
   overflow: hidden;
   width: 100%;

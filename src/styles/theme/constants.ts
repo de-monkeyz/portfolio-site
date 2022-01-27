@@ -7,6 +7,10 @@ export const COLORS = {
     light: "hsla(0, 0%, 98%, 1)", // white
     dark: "hsla(210, 10%, 21.5%, 1)", // navy navy blue
   },
+  empty: {
+    light: "hsla(0, 0%, 90%, 1)", // white
+    dark: "hsla(210, 10%, 11.5%, 1)", // navy navy blue
+  },
   primary: {
     light: "hsla(203, 71.2%, 44.9%, 1)", // Pinkish-red
     dark: "hsla(202, 95.5%, 74.1%, 1)", // Yellow

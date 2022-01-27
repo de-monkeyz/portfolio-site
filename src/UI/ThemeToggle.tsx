@@ -83,7 +83,10 @@ const AnimationWrapper = styled(motion.div)`
   height: 200%;
   transform-origin: center;
 `;
-const ThemeToggleWrapper = styled.button.attrs({ type: "button" })`
+const ThemeToggleWrapper = styled.button.attrs({
+  type: "button",
+  tabIndex: -1,
+})`
   position: fixed;
   z-index: 10;
   top: 16px;

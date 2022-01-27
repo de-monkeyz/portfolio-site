@@ -53,7 +53,7 @@ const Post: React.FC<PostProps> = ({ source, meta, shareCard, pages }) => {
         {description && (
           <meta
             property="og:description"
-            content={description}
+            content={description.trim()}
             key="description"
           />
         )}
