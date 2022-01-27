@@ -15,6 +15,7 @@ export interface CardProps {
 const SUBJECTS: { [key: string]: string } = {
   skills: "A skill practised by",
   interests: "A hobby of",
+  blog: "An article by",
 };
 const Card: React.FC<CardProps> = ({ useFileURL, page, thumbnail }) => {
   const { frontMatter: meta } = page;
